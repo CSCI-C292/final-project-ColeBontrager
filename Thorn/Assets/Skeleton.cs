@@ -10,42 +10,56 @@ public class Skeleton : MonoBehaviour
 
     [SerializeField] GameObject healthPickup;
     [SerializeField] GameObject manaPickup;
-    
+    public bool isQuitting = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void FixedUpdate()
     {
-        if(!GetComponent<Enemy>().knocked)
+        if (!GetComponent<Enemy>().knocked && !player.GetComponent<Player>().dead)
         {
             rb.velocity = (player.transform.position - transform.position).normalized * speed;
         }
+
+        if (player.GetComponent<Player>().dead)
+        {
+            rb.velocity = new Vector3();
+        }
     }
 
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
     void OnDestroy()
     {
-        int rand = Random.Range(1, 8);
-        if(rand == 1)
+        if (!isQuitting)
         {
-            rand = Random.Range(0, 3);
-            if(rand >= 1)
+            int rand = Random.Range(1, 8);
+            if (rand == 1)
             {
-                Instantiate(healthPickup, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(manaPickup, transform.position, Quaternion.identity);
+                rand = Random.Range(0, 3);
+                if (rand >= 1)
+                {
+                    Instantiate(healthPickup, transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(manaPickup, transform.position, Quaternion.identity);
+                }
             }
         }
+
     }
 }

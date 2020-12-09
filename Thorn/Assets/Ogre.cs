@@ -19,7 +19,8 @@ public class Ogre : MonoBehaviour
     private float currDelay;
     private bool attacking = false;
     [SerializeField] GameObject healthPickup;
-    
+    public bool isQuitting = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,14 +31,14 @@ public class Ogre : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         currTime -= Time.deltaTime;
-        if(currTime <= 0 && !attacking)
+        if (currTime <= 0 && !attacking)
         {
             currTime = attackDelay;
             attacking = true;
         }
-        else if(currTime <= 0 && attacking)
+        else if (currTime <= 0 && attacking)
         {
             currTime = attackTime;
             attacking = false;
@@ -47,11 +48,16 @@ public class Ogre : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!GetComponent<Enemy>().knocked)
+        if (!GetComponent<Enemy>().knocked)
         {
             rb.velocity = (player.transform.position - transform.position).normalized * speed;
         }
-        if(attacking)
+        if (attacking)
+        {
+            rb.velocity = new Vector3();
+        }
+
+        if (player.GetComponent<Player>().dead)
         {
             rb.velocity = new Vector3();
         }
@@ -66,8 +72,16 @@ public class Ogre : MonoBehaviour
         cleave.GetComponent<Cleaver>().SetDir(playerDir);
     }
 
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
     void OnDestroy()
     {
-        Instantiate(healthPickup, transform.position, Quaternion.identity);
+        if (!isQuitting)
+        {
+            Instantiate(healthPickup, transform.position, Quaternion.identity);
+        }
+
     }
 }

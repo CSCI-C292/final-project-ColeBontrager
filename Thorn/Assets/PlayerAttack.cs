@@ -30,21 +30,24 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (!GetComponent<Player>().dead)
         {
-            Attack();
-        }
-        if(Input.GetMouseButtonDown(0) && mana > 0)
-        {
-            mana--;
-            Fireball();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Attack();
+            }
+            if (Input.GetMouseButtonDown(0) && mana > 0)
+            {
+                mana--;
+                Fireball();
+            }
         }
 
-        for(int i = 0; i < manaContainers.Length; i++)
+
+        for (int i = 0; i < manaContainers.Length; i++)
         {
-            if(mana < i+1) {manaContainers[i].GetComponent<Image>().sprite = emptyMana;}
-            else if(mana >= i+1) {manaContainers[i].GetComponent<Image>().sprite = fullMana;}
+            if (mana < i + 1) { manaContainers[i].GetComponent<Image>().sprite = emptyMana; }
+            else if (mana >= i + 1) { manaContainers[i].GetComponent<Image>().sprite = fullMana; }
         }
 
 
@@ -55,17 +58,17 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("Attack");
         float x = animator.GetFloat("LookHoriz");
         float y = animator.GetFloat("LookVert");
-        if(y == -1) 
+        if (y == -1)
         {
             //attack down
             attackPoint = new Vector3(transform.position.x, transform.position.y - dist, transform.position.z);
         }
-        else if(y == 1)
+        else if (y == 1)
         {
             //attack up
             attackPoint = new Vector3(transform.position.x, transform.position.y + dist, transform.position.z);
         }
-        else if(x == 1)
+        else if (x == 1)
         {
             //attack right
             attackPoint = new Vector3(transform.position.x + dist, transform.position.y, transform.position.z);
@@ -77,20 +80,20 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPoint, range, enemiesLayer);
-        foreach(Collider2D enemy in enemiesHit)
+        foreach (Collider2D enemy in enemiesHit)
         {
             //Debug.Log("We hit "+ enemy.name);
             enemy.GetComponent<Enemy>().TakeDamage(1, transform.position);
         }
-        
+
     }
 
     void Fireball()
     {
-        
+
         Vector3 playerPos = GetComponent<BoxCollider2D>().bounds.center;
         Vector3 mouseDir = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerPos;
-        mouseDir.z = 0; 
+        mouseDir.z = 0;
         Vector3 firePos = playerPos + (spellDist * mouseDir.normalized);
         GameObject fire = Instantiate(fireball, firePos, Quaternion.identity);
         fire.GetComponent<Fireball>().SetDir(mouseDir);
@@ -98,20 +101,20 @@ public class PlayerAttack : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if(attackPoint == null) {return;}
+        if (attackPoint == null) { return; }
         Gizmos.DrawWireSphere(attackPoint, range);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.name.Length > 4 && collider.gameObject.name.Substring(0, 4) == "Mana")
+        if (collider.gameObject.name.Length > 4 && collider.gameObject.name.Substring(0, 4) == "Mana")
         {
-            if(mana < maxMana)
+            if (mana < maxMana)
             {
                 mana++;
                 Destroy(collider.gameObject);
             }
-            
+
         }
     }
 }

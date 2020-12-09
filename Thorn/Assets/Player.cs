@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private Vector3 knockDir;
     public bool knocked = false;
 
+    public bool dead = false;
+
     private int maxHealth;
 
     // Start is called before the first frame update
@@ -83,6 +85,7 @@ public class Player : MonoBehaviour
         
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        if(dead) {movement = new Vector3();}
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -102,7 +105,10 @@ public class Player : MonoBehaviour
         {
             if(health <= 0) 
             {
-                Destroy(this.gameObject);
+                dead = true;
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+                //Destroy(this.gameObject);
             }
             rb.velocity = movement * speed * Time.deltaTime;
         }

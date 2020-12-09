@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - tilemap
   - 
   - 
   - 
@@ -40,4 +42,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: tilemap
+    uniqueID: 1913453801
+    locked: 0
+  - name: spawns
+    uniqueID: 688205301
+    locked: 0
+  - name: enemies
+    uniqueID: 2387932559
+    locked: 0
+  - name: player
+    uniqueID: 3232982909
+    locked: 0
+  - name: projectiles
+    uniqueID: 3860068559
     locked: 0

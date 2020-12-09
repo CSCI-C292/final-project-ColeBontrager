@@ -13,6 +13,7 @@ public class Mage : MonoBehaviour
     [SerializeField] GameObject iceball;
 
     [SerializeField] GameObject manaPickup;
+    public bool isQuitting = false;
 
     private float currTime;
     // Start is called before the first frame update
@@ -25,10 +26,10 @@ public class Mage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currTime <= 0)
+        if (currTime <= 0)
         {
             currTime = attackTime;
-            Attack();          
+            Attack();
         }
         else
         {
@@ -39,7 +40,7 @@ public class Mage : MonoBehaviour
     void Attack()
     {
         Debug.Log("Mage attack");
-        
+
         Vector3 playerDir = (player.transform.position - transform.position).normalized;
         Vector3 icePos = transform.position + (spellDist * playerDir);
         GameObject ice = Instantiate(iceball, icePos, Quaternion.identity);
@@ -48,25 +49,37 @@ public class Mage : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!GetComponent<Enemy>().knocked)
+        if (!GetComponent<Enemy>().knocked)
         {
             Vector3 playerDir = player.transform.position - transform.position;
-            if(playerDir.magnitude <= dist) {rb.velocity = new Vector3();}
-            else 
+            if (playerDir.magnitude <= dist) { rb.velocity = new Vector3(); }
+            else
             {
                 rb.velocity = (player.transform.position - transform.position).normalized * speed;
-                
+
             }
-            
+
+        }
+        if (player.GetComponent<Player>().dead)
+        {
+            rb.velocity = new Vector3();
         }
     }
 
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
     void OnDestroy()
     {
-        float rand = Random.Range(0,2);
-        if(rand == 1)
+        if (!isQuitting)
         {
-            Instantiate(manaPickup, transform.position, Quaternion.identity);
+            float rand = Random.Range(0, 2);
+            if (rand == 1)
+            {
+                Instantiate(manaPickup, transform.position, Quaternion.identity);
+            }
         }
+
     }
 }

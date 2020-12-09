@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -7231789274255337002}
   - component: {fileID: -1813830809579143402}
   - component: {fileID: 1182442324988094283}
+  - component: {fileID: 7209626804538852169}
   m_Layer: 0
   m_Name: Iceball
   m_TagString: Untagged
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -434898737
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1960111932677794457, guid: 8411ee62045eaeb4eae99a5ebe12faf2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,3 +144,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7209626804538852169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042395026846765136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6794166b0db829f4b8f24ea6170d6638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7011887014965855319}
   - component: {fileID: 5252474644815298069}
   - component: {fileID: 4183696740569556326}
+  - component: {fileID: 7137064597471351147}
   m_Layer: 0
   m_Name: Cleaver
   m_TagString: Untagged
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -434898737
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e4751730594f05e41b3c7d1184d76e3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,3 +125,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.2
   rotation: 300
+--- !u!114 &7137064597471351147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657079102049485634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6794166b0db829f4b8f24ea6170d6638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
