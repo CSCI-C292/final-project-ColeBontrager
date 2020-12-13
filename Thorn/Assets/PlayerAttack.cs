@@ -79,6 +79,7 @@ public class PlayerAttack : MonoBehaviour
             attackPoint = new Vector3(transform.position.x - dist, transform.position.y, transform.position.z);
         }
 
+        //enemy damage- https://www.youtube.com/watch?v=sPiVz1k-fEs
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPoint, range, enemiesLayer);
         foreach (Collider2D enemy in enemiesHit)
         {

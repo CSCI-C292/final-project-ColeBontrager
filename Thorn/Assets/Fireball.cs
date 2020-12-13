@@ -31,6 +31,7 @@ public class Fireball : MonoBehaviour
         }
     }
 
+    //recieve direction- code from https://www.youtube.com/watch?v=Nke5JKPiQTw
     public void SetDir(Vector3 dir)
     {
         transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
